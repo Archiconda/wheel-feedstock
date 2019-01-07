@@ -42,6 +42,10 @@ build:
     - bash Archiconda3*.sh -b -p /root/archiconda3
     - export PATH="/root/archiconda3/bin:${PATH}"
     - source /root/archiconda3/bin/activate root
+    # This breaks a circular dependecy between pip and python
+    # https://github.com/ContinuumIO/anaconda-issues/issues/8695
+    # https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/run_conda_forge_build_setup_linux#L11
+    - conda config --set add_pip_as_python_dependency false
     # - conda --version
     # - conda update conda conda-build anaconda-client --yes
     # - conda install conda-build anaconda-client --yes
